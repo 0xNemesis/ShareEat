@@ -23,7 +23,7 @@ interface AppState {
   login: (role: Role) => void;
   logout: () => void;
   createSession: (session: Omit<DropoffSession, "id" | "remainingPortions">) => void;
-  createBooking: (sessionId: string, quantity: number) => void;
+  createBooking: (sessionId: string, quantity: number) => { success: boolean; message?: string };
   updateBookingStatus: (bookingId: string, status: Booking["status"]) => void;
 }
 
@@ -53,7 +53,7 @@ export const useStore = create<AppState>((set, get) => ({
 
   createBooking: (sessionId, quantity) => {
     const state = get();
-    if (!state.currentUser) return;
+    if (!state.currentUser) return { success: false, message: "User not logged in" };
 
     // Check quota (Mock: Max 2 bookings today)
     const today = format(new Date(), "yyyy-MM-dd");
@@ -65,9 +65,23 @@ export const useStore = create<AppState>((set, get) => ({
         b.status !== "CANCELLED"
     );
 
-    if (state.currentUser.role === "USER" && myBookingsToday.length >= 2) {
-      alert("You have reached your daily limit of 2 bookings.");
-      return;
+    if (state.currentUser.role === "USER") {
+      if (myBookingsToday.length >= 2) {
+        return { success: false, message: "You have reached your daily limit of 2 bookings." };
+      }
+      
+      // Check if booking is from a different restaurant
+      const targetSession = state.sessions.find(s => s.id === sessionId);
+      const targetRestaurantId = targetSession?.restaurantId;
+      
+      const hasBookedSameRestaurant = myBookingsToday.some(b => {
+         const session = state.sessions.find(s => s.id === b.sessionId);
+         return session?.restaurantId === targetRestaurantId;
+      });
+      
+      if (hasBookedSameRestaurant) {
+         return { success: false, message: "You cannot book from the same restaurant twice in one day." };
+      }
     }
 
     const newBooking: Booking = {
@@ -92,6 +106,8 @@ export const useStore = create<AppState>((set, get) => ({
       bookings: [...state.bookings, newBooking],
       sessions: updatedSessions,
     }));
+    
+    return { success: true };
   },
 
   updateBookingStatus: (bookingId, status) => {

@@ -10,6 +10,7 @@ import Home from "@/pages/home";
 import Auth from "@/pages/auth";
 import OwnerDashboard from "@/pages/owner-dashboard";
 import UserExplore from "@/pages/user-explore";
+import MyBookings from "@/pages/my-bookings";
 import VolunteerDashboard from "@/pages/volunteer-dashboard";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/auth" component={Auth} />
         <Route path="/owner-dashboard" component={OwnerDashboard} />
         <Route path="/explore" component={UserExplore} />
+        <Route path="/my-bookings" component={MyBookings} />
         <Route path="/volunteer-dashboard" component={VolunteerDashboard} />
         <Route component={NotFound} />
       </Switch>

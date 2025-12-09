@@ -30,12 +30,21 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
       return;
     }
 
-    createBooking(session.id, quantity);
-    toast({
-      title: "Booking Successful!",
-      description: `You have reserved ${quantity} portion(s) at ${restaurant.name}.`,
-    });
-    setIsOpen(false);
+    const result = createBooking(session.id, quantity);
+    
+    if (result.success) {
+      toast({
+        title: "Booking Successful!",
+        description: `You have reserved ${quantity} portion(s) at ${restaurant.name}.`,
+      });
+      setIsOpen(false);
+    } else {
+      toast({
+        title: "Booking Failed",
+        description: result.message || "Could not complete booking.",
+        variant: "destructive",
+      });
+    }
   };
 
   const isVolunteerOnly = session.type === "VOLUNTEER_ONLY";
