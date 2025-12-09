@@ -133,6 +133,8 @@ export default function OwnerDashboard() {
   );
 }
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 function CreateSessionDialog() {
   const { createSession } = useStore();
   const [open, setOpen] = useState(false);
@@ -188,6 +190,21 @@ function CreateSessionDialog() {
               <Input type="time" value={formData.endTime} onChange={e => setFormData({...formData, endTime: e.target.value})} />
             </div>
           </div>
+          
+          <div className="space-y-2">
+            <Label>Session Type</Label>
+            <Select value={formData.type} onValueChange={(val: any) => setFormData({...formData, type: val})}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="REGULAR">Regular (Users Only)</SelectItem>
+                <SelectItem value="VOLUNTEER_ONLY">Volunteer Only</SelectItem>
+                <SelectItem value="MIXED">Mixed (Users & Volunteers)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="space-y-2">
              <Label>Description</Label>
              <Textarea placeholder="e.g. Assorted bread and pastries" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
