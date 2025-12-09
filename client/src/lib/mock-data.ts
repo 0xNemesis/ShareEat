@@ -106,6 +106,16 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
     distance: 4.8,
     ownerId: "o3",
   },
+  {
+    id: "r4",
+    name: "Mama Maria's",
+    address: "12 Pine St, Westside",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1000",
+    category: "Comfort Food",
+    rating: 4.7,
+    distance: 2.1,
+    ownerId: "o4",
+  }
 ];
 
 const today = new Date();
@@ -150,6 +160,32 @@ export const MOCK_SESSIONS: DropoffSession[] = [
     allergens: ["Gluten", "Dairy", "Garlic"],
     status: "OPEN",
     type: "VOLUNTEER_ONLY",
+  },
+  {
+    id: "s4",
+    restaurantId: "r3",
+    date: format(today, "yyyy-MM-dd"),
+    startTime: "21:00",
+    endTime: "22:00",
+    totalPortions: 15,
+    remainingPortions: 10,
+    description: "Leftover pepperoni and cheese pizza slices.",
+    allergens: ["Gluten", "Dairy"],
+    status: "OPEN",
+    type: "REGULAR",
+  },
+  {
+    id: "s5",
+    restaurantId: "r4",
+    date: format(today, "yyyy-MM-dd"),
+    startTime: "18:00",
+    endTime: "19:00",
+    totalPortions: 8,
+    remainingPortions: 8,
+    description: "Hearty vegetable soup and bread rolls.",
+    allergens: ["Gluten"],
+    status: "OPEN",
+    type: "REGULAR",
   },
 ];
 
