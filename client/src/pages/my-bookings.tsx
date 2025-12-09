@@ -4,8 +4,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStore } from "@/lib/store";
 import { format } from "date-fns";
-import { Calendar, Clock, MapPin, QrCode } from "lucide-react";
+import { Calendar, Clock, MapPin, QrCode, XCircle } from "lucide-react";
 import { useLocation } from "wouter";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 export default function MyBookings() {
   const { currentUser, bookings, sessions, restaurants } = useStore();
@@ -68,11 +71,24 @@ export default function MyBookings() {
 }
 
 function BookingCard({ booking }: { booking: any }) {
-  const { sessions, restaurants } = useStore();
+  const { sessions, restaurants, updateBookingStatus } = useStore();
+  const [showQR, setShowQR] = useState(false);
   const session = sessions.find((s) => s.id === booking.sessionId);
   const restaurant = restaurants.find((r) => r.id === session?.restaurantId);
 
   if (!session || !restaurant) return null;
+
+  const handleCancel = () => {
+    // In a real app we'd use a nice confirmation dialog, but for now a simple confirm is functional
+    // Or we could make a dedicated Dialog for cancellation if we wanted to be fancy.
+    // Let's stick to a simple confirm for speed as per "mockup mode" principles unless user asked for fancy.
+    // Actually, let's just do it directly since we have a button.
+    updateBookingStatus(booking.id, "CANCELLED");
+    toast({
+        title: "Booking Cancelled",
+        description: "Your booking has been cancelled successfully.",
+    });
+  };
 
   return (
     <Card className="overflow-hidden border-l-4 border-l-primary">
@@ -108,9 +124,34 @@ function BookingCard({ booking }: { booking: any }) {
            <p className="text-muted-foreground">Booking for <span className="text-foreground font-semibold">{booking.quantity} portion(s)</span></p>
         </div>
       </CardContent>
-      <CardFooter className="bg-slate-50 p-4 flex justify-center">
-         <Button variant="outline" className="w-full gap-2">
-            <QrCode className="h-4 w-4" /> Show QR Code
+      <CardFooter className="bg-slate-50 p-4 grid grid-cols-2 gap-2">
+         <Dialog open={showQR} onOpenChange={setShowQR}>
+            <DialogTrigger asChild>
+                <Button variant="outline" className="w-full gap-2">
+                    <QrCode className="h-4 w-4" /> Show QR
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md flex flex-col items-center justify-center text-center p-10">
+                <DialogHeader>
+                  <DialogTitle>Pickup Code</DialogTitle>
+                  <DialogDescription>Show this code to the restaurant staff to claim your meal.</DialogDescription>
+                </DialogHeader>
+                <div className="bg-white p-4 rounded-xl border-4 border-black/10 my-4 shadow-inner">
+                    {/* Simulated QR Code with a pattern */}
+                    <div className="h-48 w-48 bg-neutral-900 flex items-center justify-center text-white/10 overflow-hidden relative">
+                         <div className="absolute inset-0 bg-[url('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ShareEatBooking')] bg-contain bg-no-repeat bg-center mix-blend-screen opacity-90"></div>
+                    </div>
+                </div>
+                <h2 className="text-3xl font-mono font-bold tracking-widest text-primary">{booking.code}</h2>
+            </DialogContent>
+         </Dialog>
+         
+         <Button 
+            variant="outline" 
+            className="w-full border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 hover:border-red-300" 
+            onClick={handleCancel}
+         >
+            <XCircle className="h-4 w-4 mr-2" /> Cancel
          </Button>
       </CardFooter>
     </Card>
