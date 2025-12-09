@@ -1,0 +1,314 @@
+Ini bisa kamu copy-paste ke Replit / AI mana pun sebagai *prompt project*-nya. Aku tambahin banyak detail teknis + fitur tapi tetap sesuai ide awal kamu 👇
+
+---
+
+**PROMPT SHAREEAT (LENGKAP)**
+
+Kamu adalah seorang senior full-stack engineer dan UX designer. Tolong bantu saya merancang dan membangun aplikasi bernama **ShareEat**.
+
+### 1. Gambaran Besar Aplikasi
+
+ShareEat adalah aplikasi yang menghubungkan:
+
+1. **Business Owner F&B (restoran, kafe, bakery, dll.)**
+   yang punya makanan sisa tapi masih layak makan dan ingin menyumbangkannya.
+
+2. **User penerima (orang yang membutuhkan makanan)**
+   yang bisa mengambil makanan gratis dari restoran terdekat.
+
+3. **Volunteer**
+   pengguna terverifikasi yang bisa mengambil makanan dalam jumlah banyak dari restoran, lalu membagikannya ke orang-orang yang membutuhkan di jalanan / lokasi tertentu.
+
+Tujuan utama aplikasi:
+
+* Mengurangi food waste.
+* Membantu orang yang kesulitan makanan.
+* Membuat proses donasi makanan jadi terstruktur, aman, dan terjadwal.
+
+Aplikasi punya **dua sisi utama** (plus role tambahan):
+
+* **Sisi Business Owner**
+* **Sisi User penerima**
+* **Sisi Volunteer (role khusus)**
+* (Opsional) **Sisi Admin** untuk moderasi & verifikasi.
+
+---
+
+### 2. Role & Hak Akses
+
+#### a. Business Owner
+
+* Registrasi & login.
+* Melengkapi profil bisnis: nama resto, alamat lengkap, nomor telepon, jam operasional, foto resto, jenis makanan utama.
+* Mendaftarkan beberapa cabang restoran (multi-outlet support).
+* Menjadwalkan **drop-off food session**:
+
+  * Tanggal & waktu drop-off (biasanya saat atau setelah resto tutup).
+  * Estimasi durasi drop-off (misalnya 19.00–20.00).
+  * Jumlah porsi yang disediakan.
+  * Deskripsi makanan: jenis (nasi, roti, lauk, dll), kondisi makanan, info alergi (kacang, dairy, gluten).
+* Mengatur:
+
+  * Batas jumlah booking untuk satu sesi drop-off.
+  * Prioritas penerima (misal: perorangan dulu, sisanya volunteer).
+* Menerima / menolak booking dari user atau volunteer:
+
+  * Bisa melihat profil singkat user / volunteer (nama, history pengambilan, rating/sistem reputasi sederhana).
+  * Bisa menolak jika profil user mencurigakan / abuse.
+* Melihat riwayat:
+
+  * Jumlah makanan yang sudah disumbangkan.
+  * Berapa user / volunteer yang sudah dibantu.
+* Notifikasi:
+
+  * Notif saat ada booking baru.
+  * Notif saat user batal.
+  * Notif saat sesi hampir penuh.
+
+#### b. User Penerima (Receiver)
+
+* Registrasi & login.
+* Melengkapi profil sederhana: nama, tanggal lahir, jumlah anggota keluarga (opsional), foto profil.
+* Mengizinkan akses lokasi (GPS) untuk menemukan resto di radius **maksimal 5 km**.
+* Melihat daftar restoran terdekat yang punya sesi drop-off aktif / akan datang:
+
+  * Ditampilkan dalam list & peta (kalau memungkinkan).
+  * Bisa difilter berdasarkan waktu drop-off, jenis makanan, dan rating resto.
+* Aturan:
+
+  * User hanya boleh mengambil makanan dari resto dengan jarak ≤ 5 km dari lokasinya.
+  * User punya kuota **maksimal 2x pengambilan per hari**, dan **harus di restoran yang berbeda**.
+* Booking slot:
+
+  * User harus melakukan **booking terlebih dahulu** untuk mengambil bagian dari porsi yang tersedia.
+  * Saat booking, user melihat:
+
+    * Jam drop-off.
+    * Sisa slot/porsi.
+    * Lokasi dan petunjuk arah.
+  * Setelah booking berhasil, user mendapatkan:
+
+    * Kode booking / QR code.
+    * Detail alamat dan jam kedatangan.
+* Pengambilan makanan:
+
+  * User hanya dapat mengambil makanan **pada waktu drop-off yang sudah dijadwalkan**.
+  * Resto dapat melakukan konfirmasi lewat scan QR atau tombol “mark as picked up”.
+* Riwayat:
+
+  * User dapat melihat riwayat pengambilan makanan per hari / per minggu.
+* Anti abuse:
+
+  * Sistem mengecek kuota harian (maks 2x).
+  * Sistem mengecek jarak (maks 5 km).
+  * Bisa ada sistem peringatan jika user sering tidak datang (no-show).
+
+#### c. Volunteer
+
+* Volunteer adalah user dengan status khusus.
+* Proses jadi volunteer:
+
+  * Registrasi seperti user biasa.
+  * Ajukan verifikasi volunteer: upload KTP / identitas, foto wajah, dan alasan ingin jadi volunteer.
+  * Admin melakukan verifikasi manual dan mengubah role user menjadi Volunteer.
+* Hak akses Volunteer:
+
+  * Bisa melihat sesi drop-off yang mengizinkan pengambilan dalam jumlah besar (khusus untuk volunteer).
+  * Bisa booking beberapa porsi sekaligus dari satu resto (misalnya 10, 20, 30 porsi).
+  * Wajib mengisi:
+
+    * Perkiraan lokasi pembagian (misalkan: “sekitar stasiun X”, “kawasan Y”).
+    * Perkiraan jam pembagian.
+  * Resto bisa menerima / menolak booking volunteer.
+* Setelah pembagian:
+
+  * Volunteer bisa menandai “sudah dibagikan”.
+  * (Opsional) Volunteer dapat upload foto bukti pembagian untuk transparansi.
+* Riwayat Volunteer:
+
+  * Jumlah makanan yang sudah dibagikan.
+  * Berapa kali menjadi volunteer.
+
+#### d. Admin (opsional, tapi bagus kalau didesain)
+
+* Memverifikasi:
+
+  * Business Owner (cek keaslian resto, dokumen pendukung).
+  * Volunteer (cek identitas).
+* Mengelola laporan penyalahgunaan:
+
+  * User yang spam / tidak sopan.
+  * Restoran yang memberikan makanan tidak layak.
+* Bisa suspend akun tertentu.
+* Melihat statistik global ShareEat:
+
+  * Total porsi dibagikan.
+  * Total resto aktif.
+  * Total volunteer aktif.
+
+---
+
+### 3. Flow Utama Aplikasi
+
+#### Flow Business Owner
+
+1. Business Owner buat akun.
+2. Lengkapi profil restoran dan (opsional) ajukan verifikasi resto.
+3. Tambah outlet / cabang kalau ada.
+4. Buat **Drop-off Session**:
+
+   * Pilih outlet.
+   * Tentukan tanggal & jam.
+   * Tentukan jumlah porsi.
+   * Isi deskripsi makanan dan info alergi.
+   * Tentukan apakah sesi ini:
+
+     * Untuk User biasa saja.
+     * Untuk Volunteer saja.
+     * Campuran (sebagian slot untuk user, sebagian untuk volunteer).
+5. Menunggu booking dari pengguna:
+
+   * Bisa melihat list booking yang masuk (nama, role, jarak, histori).
+   * Bisa klik **Approve** atau **Reject** untuk masing-masing booking.
+6. Saat jam drop-off:
+
+   * Resto melihat daftar user/volunteer yang akan datang.
+   * Saat makanan diambil, resto menandai booking sebagai **completed** / scan QR.
+7. Setelah selesai:
+
+   * Sesi drop-off dianggap closed, tidak bisa booking lagi.
+   * Statistik porsi tersalur ter-update.
+
+#### Flow User Penerima
+
+1. User buat akun dan login.
+2. Share lokasi (GPS).
+3. Aplikasi menampilkan daftar resto dalam radius 5 km yang punya sesi drop-off dengan:
+
+   * Waktu drop-off masih berlaku (sekarang atau beberapa jam ke depan).
+   * Masih ada slot tersedia.
+4. User memilih salah satu resto, cek detail, lalu klik **Book Slot**:
+
+   * Sistem mengecek:
+
+     * Jarak ≤ 5 km.
+     * Kuota pengambilan hari ini (maks 2x & di resto berbeda).
+5. Jika lolos, booking berhasil, user mendapatkan:
+
+   * Nomor booking / QR code.
+   * Detail jam dan lokasi.
+6. User datang saat jam drop-off, menunjukkan QR / booking ID, resto menandai sebagai **picked up**.
+7. Kuota harian user otomatis berkurang.
+
+#### Flow Volunteer
+
+1. Volunteer terverifikasi login.
+2. Cari sesi drop-off yang membuka slot volunteer.
+3. Ajukan booking dengan jumlah porsi lebih besar:
+
+   * Sebutkan lokasi pembagian rencana.
+4. Resto menerima / menolak booking.
+5. Jika diterima, volunteer datang di jam drop-off, ambil makanan.
+6. Setelah membagikan, volunteer bisa update status “sudah dibagikan” dan upload bukti (opsional).
+
+---
+
+### 4. Fitur Tambahan & Detail Teknis yang Diinginkan
+
+Tolong bantu saya dengan hal-hal berikut:
+
+1. **Desain database / ERD**
+   Minimal ada tabel:
+
+   * `users` (role: USER, OWNER, VOLUNTEER, ADMIN)
+   * `restaurants`
+   * `restaurant_branches` (jika perlu multi-outlet)
+   * `dropoff_sessions`
+   * `bookings`
+   * `volunteer_verifications`
+   * `restaurant_verifications`
+   * `notifications`
+   * (opsional) `reviews` atau `reports` jika ada sistem rating / laporan.
+
+2. **Sistem Lokasi & Radius 5 km**
+
+   * Simpan koordinat (latitude, longitude) untuk user dan resto.
+   * Implementasi filter jarak menggunakan perhitungan haversine atau library geolocation.
+   * Pastikan hanya resto dalam radius 5 km yang muncul di list.
+
+3. **Kuota 2x Sehari**
+
+   * Pada saat user booking, cek:
+
+     * Berapa booking sukses user di tanggal yang sama.
+     * Pastikan tidak lebih dari 2.
+     * Pastikan restoran yang dibooking berbeda dari resto sebelumnya pada hari yang sama.
+
+4. **Sistem Status Booking**
+
+   * Status yang jelas: `PENDING`, `APPROVED`, `REJECTED`, `CANCELLED`, `COMPLETED`, `NO_SHOW`.
+   * Business Owner bisa mengubah status.
+   * Otomatis tandai `NO_SHOW` jika jam drop-off sudah lewat jauh dan user tidak datang (opsional).
+
+5. **Notifikasi**
+
+   * Notifikasi dalam aplikasi (in-app).
+   * Bisa disimulasikan: “Anda punya booking baru”, “Booking Anda disetujui”, “Drop-off akan dimulai 30 menit lagi”.
+
+6. **Keamanan & Anti Abuse**
+
+   * Validasi input.
+   * Rate limiting sederhana (misalnya user tidak bisa spam booking).
+   * Supaya tidak ada user yang berpindah lokasi secara fiktif (opsional: lock lokasi dalam 1 hari).
+
+7. **UI/UX**
+
+   * Buat wireframe kasar atau deskripsi layar, minimal:
+
+     * Halaman onboarding & login/register.
+     * Halaman dashboard Business Owner (list drop-off session, tombol tambah sesi).
+     * Halaman membuat sesi drop-off.
+     * Halaman list restoran terdekat untuk user.
+     * Halaman detail drop-off session.
+     * Halaman booking & konfirmasi.
+     * Halaman profil user, profil resto, riwayat.
+
+8. **Arsitektur Aplikasi**
+
+   * Gunakan arsitektur yang bersih dan terstruktur (misal: backend REST API + frontend SPA).
+   * Jelaskan secara singkat:
+
+     * Struktur folder.
+     * Endpoint utama (contoh: `POST /auth/register`, `POST /dropoffs`, `GET /dropoffs/nearby`, `POST /bookings`, dll).
+   * Sertakan contoh beberapa endpoint penting dan payload JSON-nya.
+
+---
+
+### Output yang Saya Harapkan dari Kamu
+
+Dari prompt ini, tolong:
+
+1. Buatkan **rancangan sistem** (deskripsi arsitektur + ERD).
+2. Buatkan **daftar endpoint API** lengkap dengan method & contoh request/response.
+3. Buatkan **deskripsi layar (screen) utama** dan flow UX-nya.
+4. (Opsional kalau sempat) Beri contoh implementasi:
+
+   * Model database.
+   * Beberapa endpoint backend.
+   * Contoh komponen frontend untuk:
+
+     * List resto terdekat.
+     * Form buat drop-off session.
+     * Halaman booking user.
+
+Pastikan semua desain & code example mengikuti aturan:
+
+* Business Owner bisa menjadwalkan jam drop-off & jumlah porsi.
+* User hanya bisa booking di radius 5 km dan kuota 2x per hari di resto berbeda.
+* User harus booking slot dulu sebelum datang.
+* Business Owner bisa approve/reject booking.
+* Ada role Volunteer dengan kemampuan ambil banyak porsi dan membagikannya.
+
+---
+
+Kalau prompt ini kurang jelas, tetap ambil inisiatif untuk mengisi detail-detail standar aplikasi produksi yang baik.
