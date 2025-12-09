@@ -114,6 +114,23 @@ export const useStore = create<AppState>((set, get) => ({
   },
 
   updateBookingStatus: (bookingId, status) => {
+    const state = get();
+    const booking = state.bookings.find(b => b.id === bookingId);
+    
+    if (!booking) return;
+
+    // If we are cancelling or rejecting, return portions to the session
+    // But only if the previous status was PENDING or APPROVED (meaning portions were reserved)
+    if (["CANCELLED", "REJECTED"].includes(status) && ["PENDING", "APPROVED"].includes(booking.status)) {
+        const updatedSessions = state.sessions.map(s => {
+            if (s.id === booking.sessionId) {
+                return { ...s, remainingPortions: s.remainingPortions + booking.quantity };
+            }
+            return s;
+        });
+        set({ sessions: updatedSessions });
+    }
+
     set((state) => ({
       bookings: state.bookings.map((b) =>
         b.id === bookingId ? { ...b, status } : b
