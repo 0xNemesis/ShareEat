@@ -12,6 +12,7 @@ import OwnerDashboard from "@/pages/owner-dashboard";
 import UserExplore from "@/pages/user-explore";
 import MyBookings from "@/pages/my-bookings";
 import VolunteerDashboard from "@/pages/volunteer-dashboard";
+import VolunteerBookings from "@/pages/volunteer-bookings";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/explore" component={UserExplore} />
         <Route path="/my-bookings" component={MyBookings} />
         <Route path="/volunteer-dashboard" component={VolunteerDashboard} />
+        <Route path="/volunteer-bookings" component={VolunteerBookings} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
