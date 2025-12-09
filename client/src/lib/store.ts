@@ -56,13 +56,16 @@ export const useStore = create<AppState>((set, get) => ({
     if (!state.currentUser) return { success: false, message: "User not logged in" };
 
     // Check quota (Mock: Max 2 bookings today)
-    const today = format(new Date(), "yyyy-MM-dd");
+    const todayStr = format(new Date(), "yyyy-MM-dd");
     const myBookingsToday = state.bookings.filter(
-      (b) =>
-        b.userId === state.currentUser?.id &&
-        b.bookingTime.startsWith(today) &&
-        b.status !== "REJECTED" &&
-        b.status !== "CANCELLED"
+      (b) => {
+        if (b.userId !== state.currentUser?.id) return false;
+        if (b.status === "REJECTED" || b.status === "CANCELLED") return false;
+
+        // Compare dates in local time
+        const bookingDateStr = format(new Date(b.bookingTime), "yyyy-MM-dd");
+        return bookingDateStr === todayStr;
+      }
     );
 
     if (state.currentUser.role === "USER") {
