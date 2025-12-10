@@ -1,52 +1,40 @@
-import type { Plugin } from 'vite';
-import fs from 'fs';
-import path from 'path';
+import type { Plugin } from "vite";
+import fs from "fs";
+import path from "path";
 
-/**
- * Vite plugin that updates og:image and twitter:image meta tags
- * to point to the app's opengraph image with the correct Replit domain.
- */
 export function metaImagesPlugin(): Plugin {
   return {
-    name: 'vite-plugin-meta-images',
+    name: "vite-plugin-meta-images",
     transformIndexHtml(html) {
       const baseUrl = getDeploymentUrl();
       if (!baseUrl) {
-        log('[meta-images] no Replit deployment domain found, skipping meta tag updates');
+        console.log("[meta-images] No deployment URL found, skipping meta updates.");
         return html;
       }
 
-      // Check if opengraph image exists in public directory
-      const publicDir = path.resolve(process.cwd(), 'client', 'public');
-      const opengraphPngPath = path.join(publicDir, 'opengraph.png');
-      const opengraphJpgPath = path.join(publicDir, 'opengraph.jpg');
-      const opengraphJpegPath = path.join(publicDir, 'opengraph.jpeg');
+      const publicDir = path.resolve(process.cwd(), "client", "public");
 
-      let imageExt: string | null = null;
-      if (fs.existsSync(opengraphPngPath)) {
-        imageExt = 'png';
-      } else if (fs.existsSync(opengraphJpgPath)) {
-        imageExt = 'jpg';
-      } else if (fs.existsSync(opengraphJpegPath)) {
-        imageExt = 'jpeg';
-      }
+      const possibleFiles = ["opengraph.png", "opengraph.jpg", "opengraph.jpeg"];
+      const foundFile = possibleFiles.find(file =>
+        fs.existsSync(path.join(publicDir, file))
+      );
 
-      if (!imageExt) {
-        log('[meta-images] OpenGraph image not found, skipping meta tag updates');
+      if (!foundFile) {
+        console.log("[meta-images] No OpenGraph image found.");
         return html;
       }
 
-      const imageUrl = `${baseUrl}/opengraph.${imageExt}`;
+      const imageUrl = `${baseUrl}/${foundFile}`;
 
-      log('[meta-images] updating meta image tags to:', imageUrl);
+      console.log("[meta-images] Updating meta images to:", imageUrl);
 
       html = html.replace(
-        /<meta\s+property="og:image"\s+content="[^"]*"\s*\/>/g,
+        /<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/g,
         `<meta property="og:image" content="${imageUrl}" />`
       );
 
       html = html.replace(
-        /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/>/g,
+        /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/g,
         `<meta name="twitter:image" content="${imageUrl}" />`
       );
 
@@ -56,23 +44,11 @@ export function metaImagesPlugin(): Plugin {
 }
 
 function getDeploymentUrl(): string | null {
-  if (process.env.REPLIT_INTERNAL_APP_DOMAIN) {
-    const url = `https://${process.env.REPLIT_INTERNAL_APP_DOMAIN}`;
-    log('[meta-images] using internal app domain:', url);
-    return url;
+  if (process.env.RENDER_EXTERNAL_URL) {
+    return process.env.RENDER_EXTERNAL_URL;
   }
-
-  if (process.env.REPLIT_DEV_DOMAIN) {
-    const url = `https://${process.env.REPLIT_DEV_DOMAIN}`;
-    log('[meta-images] using dev domain:', url);
-    return url;
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
   }
-
   return null;
-}
-
-function log(...args: any[]): void {
-  if (process.env.NODE_ENV === 'production') {
-    console.log(...args);
-  }
 }
