@@ -6,11 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStore } from "@/lib/store";
 import { DropoffSession } from "@/lib/mock-data";
-import { Plus, Users, Calendar, Clock, CheckCircle, XCircle } from "lucide-react";
-import { useState } from "react";
+import { Plus, Users, Calendar, Clock, CheckCircle, XCircle, ScanLine, Camera } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
 
 export default function OwnerDashboard() {
   const { currentUser, sessions, bookings, createSession, updateBookingStatus, users } = useStore();
@@ -38,7 +39,10 @@ export default function OwnerDashboard() {
           <h1 className="font-heading text-3xl font-bold">Business Dashboard</h1>
           <p className="text-muted-foreground">Manage your drop-off sessions and bookings.</p>
         </div>
-        <CreateSessionDialog />
+        <div className="flex gap-2">
+            <ScanQRDialog />
+            <CreateSessionDialog />
+        </div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
@@ -103,7 +107,10 @@ export default function OwnerDashboard() {
                     <span className="font-medium">{users.find(u => u.id === booking.userId)?.name}</span>
                     <span className="text-muted-foreground text-sm">({booking.quantity} portions)</span>
                   </div>
-                  <Badge variant={booking.status === "APPROVED" ? "default" : "outline"}>{booking.status}</Badge>
+                  <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-muted-foreground bg-slate-100 px-2 py-1 rounded">{booking.code}</span>
+                      <Badge variant={booking.status === "APPROVED" ? "default" : "outline"}>{booking.status}</Badge>
+                  </div>
                </div>
              ))}
           </div>
@@ -132,6 +139,95 @@ export default function OwnerDashboard() {
     </div>
   );
 }
+
+function ScanQRDialog() {
+    const { bookings, sessions, updateBookingStatus, users } = useStore();
+    const [open, setOpen] = useState(false);
+    const [code, setCode] = useState("");
+    const [isScanning, setIsScanning] = useState(false);
+  
+    useEffect(() => {
+        if (open) {
+            setIsScanning(true);
+        } else {
+            setIsScanning(false);
+            setCode("");
+        }
+    }, [open]);
+
+    const handleVerify = () => {
+      // Find booking
+      const booking = bookings.find(b => b.code === code);
+      
+      if (!booking) {
+          toast({ title: "Invalid Code", description: "Booking not found.", variant: "destructive" });
+          return;
+      }
+  
+      // Verify ownership (mock: owner r1)
+      const session = sessions.find(s => s.id === booking.sessionId);
+      if (session?.restaurantId !== "r1") {
+          toast({ title: "Wrong Restaurant", description: "This booking is for another restaurant.", variant: "destructive" });
+          return;
+      }
+  
+      if (booking.status === "COMPLETED") {
+          toast({ title: "Already Completed", description: "This booking has already been picked up.", variant: "destructive" });
+          return;
+      }
+
+      if (booking.status !== "APPROVED") {
+        toast({ title: "Not Approved", description: "This booking is not approved yet.", variant: "destructive" });
+        return;
+      }
+      
+      updateBookingStatus(booking.id, "COMPLETED");
+      const user = users.find(u => u.id === booking.userId);
+      
+      toast({ 
+          title: "Pickup Verified!", 
+          description: `Booking verified for ${user?.name}. Status updated to Completed.` 
+      });
+      setOpen(false);
+    };
+  
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="secondary"><ScanLine className="mr-2 h-4 w-4" /> Scan QR</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Scan Customer QR</DialogTitle>
+            <DialogDescription>
+              Scan the customer's code to verify and complete the pickup.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col items-center justify-center py-6 space-y-4">
+             {/* Simulated Camera View */}
+             <div className="w-full aspect-video bg-black rounded-lg relative overflow-hidden flex items-center justify-center">
+                 {isScanning && (
+                     <>
+                        <div className="absolute inset-0 bg-black/50 z-10 animate-pulse flex items-center justify-center text-white/50 text-sm">
+                            <Camera className="h-8 w-8 mb-2 opacity-50" />
+                            <span className="absolute bottom-4">Camera Active</span>
+                        </div>
+                        {/* Scanning Line Animation */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-green-500 shadow-[0_0_20px_rgba(34,197,94,0.8)] z-20 animate-[scan_2s_ease-in-out_infinite]"></div>
+                     </>
+                 )}
+                 <div className="absolute inset-0 border-2 border-white/30 m-8 rounded-lg z-10"></div>
+             </div>
+
+             <div className="flex w-full max-w-sm items-center space-x-2">
+                <Input type="text" placeholder="Enter code manually (e.g. SE-1234)" value={code} onChange={(e) => setCode(e.target.value)} />
+                <Button type="submit" onClick={handleVerify}>Verify</Button>
+             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    )
+  }
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
