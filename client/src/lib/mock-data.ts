@@ -54,21 +54,21 @@ export interface Booking {
 export const MOCK_USERS: User[] = [
   {
     id: "u1",
-    name: "Alex Receiver",
-    email: "alex@example.com",
+    name: "Fadhil Membutuhkan",
+    email: "fadhil@mail.com",
     role: "USER",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
   },
   {
     id: "o1",
-    name: "Sarah Owner",
-    email: "sarah@bakery.com",
+    name: "Ibu Owner",
+    email: "ibuowner@kostpga.com",
     role: "OWNER",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
   },
   {
     id: "v1",
-    name: "Mike Volunteer",
+    name: "Filbert Volunteer",
     email: "mike@volunteer.org",
     role: "VOLUNTEER",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike",
