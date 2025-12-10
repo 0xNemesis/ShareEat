@@ -78,7 +78,7 @@ export const MOCK_USERS: User[] = [
 export const MOCK_RESTAURANTS: Restaurant[] = [
   {
     id: "r1",
-    name: "Daily Bread Bakery",
+    name: "Kantin Anugerah",
     address: "123 Main St, Downtown",
     image: bakeryImage,
     category: "Bakery",
@@ -88,7 +88,7 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
   },
   {
     id: "r2",
-    name: "Fresh Greens Cafe",
+    name: "Kantin Boga Rasa",
     address: "45 Park Ave, Green Hill",
     image: saladImage,
     category: "Healthy / Salad",
@@ -98,7 +98,7 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
   },
   {
     id: "r3",
-    name: "Luigi's Trattoria",
+    name: "Warung Nasi Padang",
     address: "88 Italy Lane, Little Italy",
     image: italianImage,
     category: "Italian",
@@ -108,7 +108,7 @@ export const MOCK_RESTAURANTS: Restaurant[] = [
   },
   {
     id: "r4",
-    name: "Mama Maria's",
+    name: "Warteg Mulya",
     address: "12 Pine St, Westside",
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1000",
     category: "Comfort Food",
