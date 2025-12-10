@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface SessionCardProps {
   session: DropoffSession;
@@ -19,6 +20,7 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
   const { createBooking, currentUser } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
 
   const handleBooking = () => {
     if (!currentUser) {
@@ -38,6 +40,7 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
         description: `You have reserved ${quantity} portion(s) at ${restaurant.name}.`,
       });
       setIsOpen(false);
+      setDisclaimerAccepted(false); // Reset state
     } else {
       toast({
         title: "Booking Failed",
@@ -87,7 +90,10 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={(open) => {
+             setIsOpen(open);
+             if (!open) setDisclaimerAccepted(false);
+        }}>
           <DialogTrigger asChild>
             <Button className="w-full" disabled={session.remainingPortions === 0 || !canBook}>
               {session.remainingPortions === 0 ? "Sold Out" : "Book Slot"}
@@ -124,10 +130,22 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
                   />
                 </div>
               )}
+
+              <div className="flex items-start space-x-3 mt-2 p-4 bg-amber-50 rounded-md border border-amber-100">
+                <Checkbox 
+                    id="disclaimer" 
+                    checked={disclaimerAccepted} 
+                    onCheckedChange={(checked) => setDisclaimerAccepted(checked === true)}
+                    className="mt-1"
+                />
+                <Label htmlFor="disclaimer" className="text-sm leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-amber-900 font-medium">
+                    Saya memahami bahwa makanan ini adalah donasi dan tidak ada jaminan kualitas. Saya bertanggung jawab atas pengecekan kondisi makanan saat menerima.
+                </Label>
+              </div>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
-              <Button onClick={handleBooking}>Confirm Booking</Button>
+              <Button onClick={handleBooking} disabled={!disclaimerAccepted}>Confirm Booking</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
