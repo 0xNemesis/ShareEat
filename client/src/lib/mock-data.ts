@@ -57,21 +57,21 @@ export const MOCK_USERS: User[] = [
     name: "Fadhil Membutuhkan",
     email: "fadhil@mail.com",
     role: "USER",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Adrian",
   },
   {
     id: "o1",
-    name: "Ibu Owner",
-    email: "ibuowner@kostpga.com",
+    name: "Rangga Owner",
+    email: "zikryowner@kostpga.com",
     role: "OWNER",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Jade",
   },
   {
     id: "v1",
     name: "Filbert Volunteer",
     email: "mike@volunteer.org",
     role: "VOLUNTEER",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Aidan",
   },
 ];
 
