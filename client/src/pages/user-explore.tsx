@@ -13,17 +13,12 @@ export default function UserExplore() {
   const [search, setSearch] = useState("");
 
   if (currentUser?.role !== "USER") {
-    // For demo, we might want to allow viewing but not booking if not logged in
-    // But per requirements, user logs in first.
-    // We'll redirect if not user role for strictness, or allow if just viewing.
-    // Let's redirect to auth if no user at all.
     if (!currentUser) {
         setLocation("/auth");
         return null;
     }
   }
 
-  // Filter sessions that are active
   const activeSessions = sessions.filter(s => s.status === "OPEN" && s.remainingPortions > 0 && s.type !== "VOLUNTEER_ONLY");
 
   const filteredSessions = activeSessions.filter(session => {
@@ -61,7 +56,7 @@ export default function UserExplore() {
         <div className="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/OpenStreetMap_Standard_map_sample.png')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700"></div>
         <div className="relative bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
            <MapPin className="h-4 w-4 text-primary" />
-           <span className="text-sm font-medium">You are in Downtown (Radius: 5km)</span>
+           <span className="text-sm font-medium">You are in Bojongsoang (Radius: 5km)</span>
         </div>
       </div>
 
