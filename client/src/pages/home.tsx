@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Leaf, ShieldCheck, Store } from "lucide-react";
-import communityImage from "@assets/generated_images/orang_makan.jpg";
+import communityImage from "@assets/images/orang_makan.jpg";
 import { useStore } from "@/lib/store";
 
 export default function Home() {

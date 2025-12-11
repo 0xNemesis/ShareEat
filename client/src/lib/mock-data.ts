@@ -1,8 +1,8 @@
 import { addDays, setHours, setMinutes, format } from "date-fns";
-import communityImage from "@assets/generated_images/community_sharing_food_happily.png";
-import bakeryImage from "@assets/generated_images/cozy_modern_bakery_interior.png";
-import saladImage from "@assets/generated_images/fresh_salad_bar_buffet.png";
-import italianImage from "@assets/generated_images/italian_restaurant_pizza_pasta.png";
+import communityImage from "@assets/images/community_sharing_food_happily.png";
+import bakeryImage from "@assets/images/cozy_modern_bakery_interior.png";
+import saladImage from "@assets/images/fresh_salad_bar_buffet.png";
+import italianImage from "@assets/images/italian_restaurant_pizza_pasta.png";
 
 export type Role = "USER" | "OWNER" | "VOLUNTEER" | "ADMIN";
 
