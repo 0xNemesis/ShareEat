@@ -36,8 +36,8 @@ export default function OwnerDashboard() {
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="font-heading text-3xl font-bold">Business Dashboard</h1>
-          <p className="text-muted-foreground">Manage your drop-off sessions and bookings.</p>
+          <h1 className="font-heading text-3xl font-bold">Dashboard Bisnis</h1>
+          <p className="text-muted-foreground">Kelola sesi drop-off dan pemesanan Anda.</p>
         </div>
         <div className="flex gap-2">
             <ScanQRDialog />
@@ -46,22 +46,22 @@ export default function OwnerDashboard() {
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        <StatCard title="Total Sessions" value={mySessions.length.toString()} icon={<Calendar className="h-5 w-5 text-primary" />} />
-        <StatCard title="Active Bookings" value={activeBookings.length.toString()} icon={<Users className="h-5 w-5 text-secondary" />} />
-        <StatCard title="Meals Rescued" value="142" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
+        <StatCard title="Total Sesi" value={mySessions.length.toString()} icon={<Calendar className="h-5 w-5 text-primary" />} />
+        <StatCard title="Pesanan Aktif" value={activeBookings.length.toString()} icon={<Users className="h-5 w-5 text-secondary" />} />
+        <StatCard title="Makanan Terselamatkan" value="142" icon={<CheckCircle className="h-5 w-5 text-green-600" />} />
       </div>
 
       <Tabs defaultValue="bookings" className="w-full">
         <TabsList className="grid w-full grid-cols-2 max-w-[400px]">
-          <TabsTrigger value="bookings">Bookings</TabsTrigger>
-          <TabsTrigger value="sessions">My Sessions</TabsTrigger>
+          <TabsTrigger value="bookings">Pesanan</TabsTrigger>
+          <TabsTrigger value="sessions">SesiKu</TabsTrigger>
         </TabsList>
         
         <TabsContent value="bookings" className="mt-6 space-y-6">
           <div className="space-y-4">
-            <h3 className="font-heading text-xl font-semibold">Pending Requests</h3>
+            <h3 className="font-heading text-xl font-semibold">Permintaan Tertunda</h3>
             {pendingBookings.length === 0 ? (
-              <p className="text-muted-foreground italic">No pending bookings.</p>
+              <p className="text-muted-foreground italic">Tidak ada pemesanan tertunda.</p>
             ) : (
               <div className="grid gap-4">
                 {pendingBookings.map(booking => {
