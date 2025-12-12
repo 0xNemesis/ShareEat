@@ -61,8 +61,8 @@ export const MOCK_USERS: User[] = [
   },
   {
     id: "o1",
-    name: "Rangga Owner",
-    email: "ranggaowner@kostpga.com",
+    name: "Andolbion Owner",
+    email: "Andolbion@patungKuda.com",
     role: "OWNER",
     avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Jade",
   },

@@ -303,7 +303,7 @@ function CreateSessionDialog() {
 
           <div className="space-y-2">
              <Label>Deskripsi</Label>
-             <Textarea placeholder="e.g. Assorted bread and pastries" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
+             <Textarea placeholder="Aneka roti dan pastry" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
           </div>
         </div>
         <DialogFooter>

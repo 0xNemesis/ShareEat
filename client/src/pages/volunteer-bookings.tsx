@@ -31,21 +31,21 @@ export default function VolunteerBookings() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-3xl font-bold">My Volunteer Bookings</h1>
-        <p className="text-muted-foreground">Manage your bulk pickups and upload documentation.</p>
+        <h1 className="font-heading text-3xl font-bold">Pemesanan Volunteer Saya</h1>
+        <p className="text-muted-foreground">Kelola pickup massal Anda dan unggah dokumentasi.</p>
       </div>
 
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
-          <TabsTrigger value="active">Upcoming Pickups</TabsTrigger>
-          <TabsTrigger value="history">Distribution History</TabsTrigger>
+          <TabsTrigger value="active">Pickup Mendatang</TabsTrigger>
+          <TabsTrigger value="history">Riwayat Distribusi</TabsTrigger>
         </TabsList>
 
         <TabsContent value="active" className="mt-6">
           {activeBookings.length === 0 ? (
             <div className="text-center py-12 bg-slate-50 rounded-xl border border-dashed">
-              <p className="text-muted-foreground mb-4">No upcoming volunteer tasks.</p>
-              <Button onClick={() => setLocation("/volunteer-dashboard")}>Find Bulk Food</Button>
+              <p className="text-muted-foreground mb-4">Tidak ada tugas volunteer mendatang</p>
+              <Button onClick={() => setLocation("/volunteer-dashboard")}>Cari Makanan Massal</Button>
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -58,7 +58,7 @@ export default function VolunteerBookings() {
 
         <TabsContent value="history" className="mt-6">
           {pastBookings.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">No history yet.</div>
+            <div className="text-center py-12 text-muted-foreground">Belum Ada Riwayat</div>
           ) : (
             <div className="space-y-4">
               {pastBookings.map((booking) => (
