@@ -90,10 +90,10 @@ export default function Home() {
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <Stat number="15k+" label="Meals Saved" />
-            <Stat number="2.5k" label="Active Users" />
-            <Stat number="120+" label="Partner Restaurants" />
-            <Stat number="8t" label="CO2 Prevented" />
+            <Stat number="15k+" label="Makanan Terselamatkan" />
+            <Stat number="2.5k" label="User Aktif" />
+            <Stat number="120+" label="Partner Restoran" />
+            <Stat number="8t" label="CO2 Dicegah" />
           </div>
         </div>
       </section>
