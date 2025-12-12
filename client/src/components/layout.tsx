@@ -33,10 +33,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {currentUser?.role === "USER" && (
         <>
           <Link href="/explore">
-            <Button variant="ghost" className="justify-start"><Search className="mr-2 h-4 w-4" /> Explore Food</Button>
+            <Button variant="ghost" className="justify-start"><Search className="mr-2 h-4 w-4" /> Cari Makanan</Button>
           </Link>
           <Link href="/my-bookings">
-            <Button variant="ghost" className="justify-start"><Leaf className="mr-2 h-4 w-4" /> My Bookings</Button>
+            <Button variant="ghost" className="justify-start"><Leaf className="mr-2 h-4 w-4" /> PesananKu</Button>
           </Link>
         </>
       )}
@@ -50,10 +50,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {currentUser?.role === "VOLUNTEER" && (
         <>
           <Link href="/volunteer-dashboard">
-            <Button variant="ghost" className="justify-start"><MapPin className="mr-2 h-4 w-4" /> Volunteer Hub</Button>
+            <Button variant="ghost" className="justify-start"><MapPin className="mr-2 h-4 w-4" /> Pusat Volunteer</Button>
           </Link>
           <Link href="/volunteer-bookings">
-            <Button variant="ghost" className="justify-start"><Leaf className="mr-2 h-4 w-4" /> My Bookings</Button>
+            <Button variant="ghost" className="justify-start"><Leaf className="mr-2 h-4 w-4" /> PesananKu</Button>
           </Link>
         </>
       )}
