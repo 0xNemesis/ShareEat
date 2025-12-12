@@ -33,7 +33,7 @@ export default function Home() {
               <Badge className="bg-primary/20 text-primary-foreground border-primary/30 backdrop-blur-md mb-2">
                 #StopFoodWaste
               </Badge>
-              <h1 className="font-heading text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+              <h1 className="font-heading text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
                 Selamatkan Makanan,<br/>
                 <span className="text-primary">Sebarkan Kebahagiaan.</span>
               </h1>
@@ -46,9 +46,7 @@ export default function Home() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Link href="/about">
-                  <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 border-none">
-                    Cara Kerjanya
-                  </Button>
+                  
                 </Link>
               </div>
             </div>
@@ -68,21 +66,21 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard 
             icon={<Store className="h-10 w-10 text-secondary" />}
-            title="For Business Owners"
-            description="Reduce waste costs and support your community by listing surplus food for pickup."
-            action="Partner with us"
+            title="Untuk Restoran"
+            description="Kurangi biaya limbah dan dukung komunitas Anda dengan mendaftarkan makanan surplus untuk diambil."
+            action="Bergabung Dengan Kami"
           />
           <FeatureCard 
             icon={<Leaf className="h-10 w-10 text-primary" />}
-            title="For Food Savers"
-            description="Find delicious meals at 100% off from your favorite local spots. Just book and collect."
-            action="Find Food"
+            title="Untuk Penerima"
+            description="Temukan makanan lezat gratis dari tempat favorit di sekitar Anda. Cukup pesan dan ambil."
+            action="Cari Makanan"
           />
           <FeatureCard 
             icon={<ShieldCheck className="h-10 w-10 text-blue-500" />}
-            title="For Volunteers"
-            description="Help distribute large quantities of rescued food to shelters and communities in need."
-            action="Volunteer"
+            title="Untuk Volunteers"
+            description="Bantu mendistribusikan makanan hasil penyelamatan dalam jumlah besar ke shelter dan komunitas yang membutuhkan."
+            action="Ayo Membantu"
           />
         </div>
       </section>
