@@ -32,14 +32,14 @@ export default function UserExplore() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row gap-4 items-end md:items-center justify-between">
         <div>
-           <h1 className="font-heading text-3xl font-bold">Explore Food Nearby</h1>
-           <p className="text-muted-foreground">Find rescue meals within 5km of your location.</p>
+           <h1 className="font-heading text-3xl font-bold">Cari Makanan Terdekat</h1>
+           <p className="text-muted-foreground">Temukan makanan penyelamatan dalam radius 5 km dari lokasi Anda.</p>
         </div>
         <div className="flex gap-2 w-full md:w-auto">
           <div className="relative flex-1 md:w-80">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input 
-              placeholder="Search by name or category..." 
+              placeholder="cari nama atau kategori..." 
               className="pl-9 bg-white" 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -56,13 +56,13 @@ export default function UserExplore() {
         <div className="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/OpenStreetMap_Standard_map_sample.png')] bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700"></div>
         <div className="relative bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
            <MapPin className="h-4 w-4 text-primary" />
-           <span className="text-sm font-medium">You are in Bojongsoang (Radius: 5km)</span>
+           <span className="text-sm font-medium">Kamu di Bojongsoang (Radius: 5km)</span>
         </div>
       </div>
 
       {/* Categories */}
       <div className="flex gap-2 overflow-x-auto pb-2">
-        {["All", "Bakery", "Vegetarian", "Meals", "Groceries"].map((cat, i) => (
+        {["Semua", "Bakery", "Vegetarian", "Hidangan", "Sembako"].map((cat, i) => (
           <Badge 
             key={cat} 
             variant={i === 0 ? "default" : "outline"} 

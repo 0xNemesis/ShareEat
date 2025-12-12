@@ -66,19 +66,19 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard 
             icon={<Store className="h-10 w-10 text-secondary" />}
-            title="Untuk Restoran"
+            title="Restoran"
             description="Kurangi biaya limbah dan dukung komunitas Anda dengan mendaftarkan makanan surplus untuk diambil."
             action="Bergabung Dengan Kami"
           />
           <FeatureCard 
             icon={<Leaf className="h-10 w-10 text-primary" />}
-            title="Untuk Penerima"
+            title="Penerima"
             description="Temukan makanan lezat gratis dari tempat favorit di sekitar Anda. Cukup pesan dan ambil."
             action="Cari Makanan"
           />
           <FeatureCard 
             icon={<ShieldCheck className="h-10 w-10 text-blue-500" />}
-            title="Untuk Volunteers"
+            title="Volunteer"
             description="Bantu mendistribusikan makanan hasil penyelamatan dalam jumlah besar ke shelter dan komunitas yang membutuhkan."
             action="Ayo Membantu"
           />

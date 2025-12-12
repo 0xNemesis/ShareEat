@@ -20,26 +20,26 @@ export default function Auth() {
     <div className="flex items-center justify-center min-h-[80vh]">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-2">
-          <h1 className="font-heading text-3xl font-bold">Welcome to ShareEat</h1>
-          <p className="text-muted-foreground">Select a role to simulate the experience</p>
+          <h1 className="font-heading text-3xl font-bold">Selamat Datang di ShareEat</h1>
+          <p className="text-muted-foreground">Pilih Role</p>
         </div>
 
         <div className="grid gap-4">
           <RoleCard 
-            title="User (Receiver)" 
-            desc="Find and book food nearby" 
+            title="User (Penerima)" 
+            desc="Cari dan pesan makanan terdekat" 
             icon={<UserCircle className="h-6 w-6 text-primary" />}
             onClick={() => handleLogin("USER")}
           />
           <RoleCard 
-            title="Business Owner" 
-            desc="Manage donations and sessions" 
+            title="Restoran" 
+            desc="Atur donasi dan Sesi" 
             icon={<Store className="h-6 w-6 text-secondary" />}
             onClick={() => handleLogin("OWNER")}
           />
           <RoleCard 
             title="Volunteer" 
-            desc="Distribute food in bulk" 
+            desc="Distribusi makanan massal" 
             icon={<ShieldCheck className="h-6 w-6 text-blue-500" />}
             onClick={() => handleLogin("VOLUNTEER")}
           />
