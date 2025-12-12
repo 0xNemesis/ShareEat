@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const NavItems = () => (
     <>
       <Link href="/">
-        <Button variant="ghost" className="justify-start">Home</Button>
+        <Button variant="ghost" className="justify-start"></Button>
       </Link>
       
       {currentUser?.role === "USER" && (
