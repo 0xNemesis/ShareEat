@@ -29,21 +29,21 @@ export default function MyBookings() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-heading text-3xl font-bold">My Bookings</h1>
-        <p className="text-muted-foreground">Manage your upcoming pickups and view history.</p>
+        <h1 className="font-heading text-3xl font-bold">PesananKu</h1>
+        <p className="text-muted-foreground">Kelola jadwal penjemputan Anda dan lihat riwayat.</p>
       </div>
 
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
-          <TabsTrigger value="active">Upcoming</TabsTrigger>
-          <TabsTrigger value="history">History</TabsTrigger>
+          <TabsTrigger value="active">Berlangsung</TabsTrigger>
+          <TabsTrigger value="history">Riwayat</TabsTrigger>
         </TabsList>
 
         <TabsContent value="active" className="mt-6">
           {activeBookings.length === 0 ? (
             <div className="text-center py-12 bg-slate-50 rounded-xl border border-dashed">
-              <p className="text-muted-foreground mb-4">No upcoming bookings.</p>
-              <Button onClick={() => setLocation("/explore")}>Explore Food Nearby</Button>
+              <p className="text-muted-foreground mb-4">Tidak ada pesanan berlangsung.</p>
+              <Button onClick={() => setLocation("/explore")}>Cari makanan terdekat</Button>
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -56,7 +56,7 @@ export default function MyBookings() {
 
         <TabsContent value="history" className="mt-6">
           {pastBookings.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground">No booking history yet.</div>
+            <div className="text-center py-12 text-muted-foreground">Tidak ada pesanan berlangsung.</div>
           ) : (
             <div className="space-y-4">
               {pastBookings.map((booking) => (
