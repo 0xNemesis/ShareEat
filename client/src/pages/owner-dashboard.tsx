@@ -256,58 +256,58 @@ function CreateSessionDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button><Plus className="mr-2 h-4 w-4" /> New Session</Button>
+        <Button><Plus className="mr-2 h-4 w-4" /> Sesi Baru</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create Drop-off Session</DialogTitle>
+          <DialogTitle>Buat Sesi Drop-offn</DialogTitle>
           <DialogDescription>
-            Schedule a time for users to pick up surplus food.
+            Jadwalkan waktu bagi pengguna untuk mengambil makanan surplus.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Date</Label>
+              <Label>Tanggal</Label>
               <Input type="date" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
             </div>
             <div className="space-y-2">
-              <Label>Portions</Label>
+              <Label>Porsi</Label>
               <Input type="number" value={formData.totalPortions} onChange={e => setFormData({...formData, totalPortions: parseInt(e.target.value)})} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Start Time</Label>
+              <Label>Jam Mulai</Label>
               <Input type="time" value={formData.startTime} onChange={e => setFormData({...formData, startTime: e.target.value})} />
             </div>
             <div className="space-y-2">
-              <Label>End Time</Label>
+              <Label>Jam Berakhir</Label>
               <Input type="time" value={formData.endTime} onChange={e => setFormData({...formData, endTime: e.target.value})} />
             </div>
           </div>
           
           <div className="space-y-2">
-            <Label>Session Type</Label>
+            <Label>Tipe Sesi</Label>
             <Select value={formData.type} onValueChange={(val: any) => setFormData({...formData, type: val})}>
               <SelectTrigger>
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="REGULAR">Regular (Users Only)</SelectItem>
-                <SelectItem value="VOLUNTEER_ONLY">Volunteer Only</SelectItem>
-                <SelectItem value="MIXED">Mixed (Users & Volunteers)</SelectItem>
+                <SelectItem value="REGULAR">Regular (Khusus User)</SelectItem>
+                <SelectItem value="VOLUNTEER_ONLY">Khusus Volunteer</SelectItem>
+                <SelectItem value="MIXED">Campur (User & Volunteer)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
-             <Label>Description</Label>
+             <Label>Deskripsi</Label>
              <Textarea placeholder="e.g. Assorted bread and pastries" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} />
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleSubmit}>Create Session</Button>
+          <Button onClick={handleSubmit}>Buat Sesi</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
