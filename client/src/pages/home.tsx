@@ -34,21 +34,20 @@ export default function Home() {
                 #StopFoodWaste
               </Badge>
               <h1 className="font-heading text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
-                Rescue Food,<br/>
-                <span className="text-primary">Share Joy.</span>
+                Selamatkan Makanan,<br/>
+                <span className="text-primary">Sebarkan Kebahagiaan.</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-lg">
-                Connect with local restaurants to save excess food from being wasted. 
-                Good for the planet, great for your community.
+                Terhubunglah dengan restoran lokal untuk menyelamatkan makanan berlebih agar tidak terbuang. Baik untuk bumi, luar biasa untuk komunitas Anda.
               </p>
               <div className="flex gap-4 pt-4">
                 <Button size="lg" onClick={handleGetStarted} className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
-                  Get Started
+                  Mulai
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Link href="/about">
                   <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 border-none">
-                    How it Works
+                    Cara Kerjanya
                   </Button>
                 </Link>
               </div>
@@ -60,9 +59,9 @@ export default function Home() {
       {/* Roles Section */}
       <section className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="font-heading text-3xl font-bold mb-4">Join the Movement</h2>
+          <h2 className="font-heading text-3xl font-bold mb-4">Bergabunglah dengan Gerakannya</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Whether you're a business owner, a hungry neighbor, or a helping hand, there's a place for you in ShareEat.
+            Baik Anda pemilik usaha, tetangga yang membutuhkan, atau tangan yang ingin membantu selalu ada tempat untuk Anda di ShareEat.
           </p>
         </div>
 

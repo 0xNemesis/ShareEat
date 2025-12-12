@@ -46,7 +46,7 @@ export default function Auth() {
         </div>
 
         <p className="text-center text-xs text-muted-foreground">
-          Note: This is a prototype. No real authentication is required.
+          
         </p>
       </div>
     </div>
