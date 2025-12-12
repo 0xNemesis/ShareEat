@@ -101,25 +101,25 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Confirm Booking</DialogTitle>
+              <DialogTitle>Konfirmasi Pesanan</DialogTitle>
               <DialogDescription>
-                You are about to book a rescue meal from <strong>{restaurant.name}</strong>.
+                Anda akan memesan makanan dari <strong>{restaurant.name}</strong>.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="flex items-center gap-4">
                 <img src={restaurant.image} alt="Resto" className="h-16 w-16 rounded-md object-cover" />
                 <div>
-                  <p className="font-medium text-sm">Pickup Time</p>
+                  <p className="font-medium text-sm">Waktu Pengambilan</p>
                   <p className="text-muted-foreground text-sm">{session.startTime} - {session.endTime}</p>
-                  <p className="font-medium text-sm mt-1">Location</p>
+                  <p className="font-medium text-sm mt-1">Lokasi</p>
                   <p className="text-muted-foreground text-sm">{restaurant.address}</p>
                 </div>
               </div>
               
               {isVolunteer && (
                 <div className="grid gap-2">
-                  <Label htmlFor="qty">Quantity (Volunteer)</Label>
+                  <Label htmlFor="qty">Kuantitas (Volunteer)</Label>
                   <Input 
                     id="qty" 
                     type="number" 
@@ -144,8 +144,8 @@ export function SessionCard({ session, restaurant }: SessionCardProps) {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
-              <Button onClick={handleBooking} disabled={!disclaimerAccepted}>Confirm Booking</Button>
+              <Button variant="outline" onClick={() => setIsOpen(false)}>Batalkan</Button>
+              <Button onClick={handleBooking} disabled={!disclaimerAccepted}>Konfirmasi Pesanan</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

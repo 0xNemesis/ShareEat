@@ -121,20 +121,20 @@ function BookingCard({ booking }: { booking: any }) {
            <span className="font-medium">{session.startTime} - {session.endTime}</span>
         </div>
         <div className="pt-2">
-           <p className="text-muted-foreground">Booking for <span className="text-foreground font-semibold">{booking.quantity} portion(s)</span></p>
+           <p className="text-muted-foreground">Pesan untuk <span className="text-foreground font-semibold">{booking.quantity} porsi</span></p>
         </div>
       </CardContent>
       <CardFooter className="bg-slate-50 p-4 grid grid-cols-2 gap-2">
          <Dialog open={showQR} onOpenChange={setShowQR}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="w-full gap-2">
-                    <QrCode className="h-4 w-4" /> Show QR
+                    <QrCode className="h-4 w-4" /> Tampilkan QR
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md flex flex-col items-center justify-center text-center p-10">
                 <DialogHeader>
-                  <DialogTitle>Pickup Code</DialogTitle>
-                  <DialogDescription>Show this code to the restaurant staff to claim your meal.</DialogDescription>
+                  <DialogTitle>Kode Pengambilan</DialogTitle>
+                  <DialogDescription>Tunjukkan kode ini kepada staf restoran untuk mengambil makanan Anda.</DialogDescription>
                 </DialogHeader>
                 <div className="bg-white p-4 rounded-xl border-4 border-black/10 my-4 shadow-inner">
                     {/* Simulated QR Code with a pattern */}
@@ -151,7 +151,7 @@ function BookingCard({ booking }: { booking: any }) {
             className="w-full border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700 hover:border-red-300" 
             onClick={handleCancel}
          >
-            <XCircle className="h-4 w-4 mr-2" /> Cancel
+            <XCircle className="h-4 w-4 mr-2" /> Batalkan
          </Button>
       </CardFooter>
     </Card>
